@@ -1,8 +1,10 @@
+import { ReactNode } from 'react';
+
 export interface Service {
   type: 'carpooling' | 'shopping' | 'large_item';
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: ReactNode;
   baseRate: number;
   minPrice: number;
   theme: {
@@ -53,18 +55,30 @@ export interface OrderFormErrors {
   distance: string;
 }
 
-export interface ToastStyles {
-  background: string;
-  color: string;
-  borderRadius: string;
-  border?: string;
+export interface LocationInputProps {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  error?: string;
+  disabled?: boolean;
 }
 
-export interface ToastConfig {
-  style: ToastStyles;
-  duration: number;
-  iconTheme: {
-    primary: string;
-    secondary: string;
-  };
+export interface PriceInfoCardProps {
+  distanceResult: DistanceResult;
+  service: Service;
+  price: number;
+}
+
+export interface ServiceSelectionDialogProps {
+  onClose: () => void;
+  onSelectService: (service: Service) => void;
+  services: Service[];
+}
+
+export interface OrderDetailsDialogProps {
+  service: Service;
+  onClose: () => void;
+  onSubmit: (data: OrderFormData) => Promise<void>;
+  isCreating: boolean;
 }
